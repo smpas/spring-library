@@ -2,9 +2,6 @@ package ru.alishev.springcourse.models;
 
 import javax.validation.constraints.*;
 
-/**
- * @author Neil Alishev
- */
 public class Person {
     private int id;
 

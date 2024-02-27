@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.alishev.springcourse.dao.BookDao;
+import ru.alishev.springcourse.dao.PersonDAO;
 import ru.alishev.springcourse.models.Book;
 import ru.alishev.springcourse.models.Person;
 
@@ -15,10 +16,12 @@ import javax.validation.Valid;
 @RequestMapping("/books")
 public class BookController {
     private final BookDao bookDao;
+    private final PersonDAO personDAO;
 
     @Autowired
-    public BookController(BookDao bookDao) {
+    public BookController(BookDao bookDao, PersonDAO personDAO) {
         this.bookDao = bookDao;
+        this.personDAO = personDAO;
     }
 
     @GetMapping
@@ -29,13 +32,15 @@ public class BookController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
+    public String show(@PathVariable("id") int id, Model model,
+                       @ModelAttribute("person") Person person) {
         Book book = bookDao.show(id);
         Person owner = bookDao.showBookOwner(id);
         if (owner != null) {
             book.setOwner(owner);
         }
         model.addAttribute("book", book);
+        model.addAttribute("people", personDAO.index());
         return "books/show";
     }
 
@@ -82,5 +87,13 @@ public class BookController {
     public String release(@PathVariable int id) {
         bookDao.releaseBook(id);
         return "redirect:/books/{id}";
+    }
+
+    @PatchMapping("/{bookId}/new-owner")
+    public String setOwner(@PathVariable("bookId") int bookId,
+                           @ModelAttribute("person") Person person) {
+        System.out.println(person.getId());
+        bookDao.setOwner(bookId, person.getId());
+        return "redirect:/books/{bookId}";
     }
 }

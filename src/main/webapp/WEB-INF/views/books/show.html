@@ -16,6 +16,15 @@
 
 <div th:if="${book.getOwner() == null}">
     <p>Book isn't taken. Who assign the book to?</p>
+    <form th:method="PATCH" th:action="@{/books/{bookId}/new-owner(bookId=${book.getId()})}">
+        <label for="person">Choose person:</label>
+        <select th:object="${person}" th:field="*{id}" id="person">
+            <option th:each="person : ${people}" th:value="${person.getId()}"
+                    th:text="${person.getName()}"></option>
+        </select>
+        <input type="submit" value="Assign a book" />
+
+    </form>
 </div>
 
 <hr>

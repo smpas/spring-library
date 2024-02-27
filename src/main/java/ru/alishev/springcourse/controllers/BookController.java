@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.alishev.springcourse.dao.BookDao;
 import ru.alishev.springcourse.models.Book;
+import ru.alishev.springcourse.models.Person;
 
 import javax.validation.Valid;
 
@@ -29,7 +30,12 @@ public class BookController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("book", bookDao.show(id));
+        Book book = bookDao.show(id);
+        Person owner = bookDao.showBookOwner(id);
+        if (owner != null) {
+            book.setOwner(owner);
+        }
+        model.addAttribute("book", book);
         return "books/show";
     }
 
@@ -70,5 +76,11 @@ public class BookController {
     public String delete(@PathVariable int id) {
         bookDao.delete(id);
         return "redirect:/books";
+    }
+
+    @PatchMapping("/{id}/release")
+    public String release(@PathVariable int id) {
+        bookDao.releaseBook(id);
+        return "redirect:/books/{id}";
     }
 }

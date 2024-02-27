@@ -13,9 +13,6 @@ import ru.alishev.springcourse.util.PersonValidator;
 import javax.validation.Valid;
 import java.util.List;
 
-/**
- * @author Neil Alishev
- */
 @Controller
 @RequestMapping("/people")
 public class PeopleController {

@@ -20,17 +20,16 @@ public class Book {
     @Max(value = 2024, message = "Year shouldn't be greater than 2024")
     private int year;
 
-    private Integer owner;
+    private Person owner;
 
     public Book() {
     }
 
-    public Book(int id, String name, String author, int year, Integer owner) {
+    public Book(int id, String name, String author, int year) {
         this.id = id;
         this.name = name;
         this.author = author;
         this.year = year;
-        this.owner = owner;
     }
 
     public int getId() {
@@ -65,11 +64,11 @@ public class Book {
         this.year = year;
     }
 
-    public Integer getOwner() {
+    public Person getOwner() {
         return owner;
     }
 
-    public void setOwner(Integer owner) {
+    public void setOwner(Person owner) {
         this.owner = owner;
     }
 }

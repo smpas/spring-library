@@ -1,6 +1,7 @@
 package ru.alishev.springcourse.models;
 
 import javax.validation.constraints.*;
+import java.util.List;
 
 public class Person {
     private int id;
@@ -12,6 +13,8 @@ public class Person {
     @Min(value = 1900, message = "Year should be greater than 1900")
     @Max(value = 2024, message = "Year shouldn't be greater than 2024")
     private int year;
+
+    private List<Book> books;
 
     public Person() {
 
@@ -45,5 +48,13 @@ public class Person {
 
     public void setYear(int year) {
         this.year = year;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
     }
 }

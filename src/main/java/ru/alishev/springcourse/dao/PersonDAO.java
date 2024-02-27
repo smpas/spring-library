@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import ru.alishev.springcourse.models.Book;
 import ru.alishev.springcourse.models.Person;
 
 import java.util.List;
@@ -35,6 +36,15 @@ public class PersonDAO {
                         new BeanPropertyRowMapper(Person.class))
                 .stream()
                 .findAny();
+    }
+
+    public List<Book> showPersonBooks(int personId) {
+        return jdbcTemplate.query("SELECT b.id, b.name, b.author, b.year " +
+                                      "FROM person p " +
+                                          "JOIN book b ON p.id = b.owner " +
+                                      "WHERE p.id = ?",
+                new Object[]{personId},
+                new BeanPropertyRowMapper<>(Book.class));
     }
 
     public void save(Person person) {

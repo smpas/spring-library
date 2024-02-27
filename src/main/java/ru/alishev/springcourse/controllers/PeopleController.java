@@ -6,10 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.alishev.springcourse.dao.PersonDAO;
+import ru.alishev.springcourse.models.Book;
 import ru.alishev.springcourse.models.Person;
 import ru.alishev.springcourse.util.PersonValidator;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author Neil Alishev
@@ -35,7 +37,11 @@ public class PeopleController {
 
     @GetMapping("/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        model.addAttribute("person", personDAO.show(id));
+        Person person = personDAO.show(id);
+        if (person != null) {
+            person.setBooks(personDAO.showPersonBooks(id));
+        }
+        model.addAttribute("person", person);
         return "people/show";
     }
 

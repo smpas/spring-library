@@ -29,4 +29,9 @@ public class BookDao {
                 .findAny()
                 .orElse(null);
     }
+
+    public void save(Book book) {
+        jdbcTemplate.update("INSERT INTO Book(name, author, year) VALUES (?, ?, ?)", book.getName(),
+                book.getAuthor(), book.getYear());
+    }
 }

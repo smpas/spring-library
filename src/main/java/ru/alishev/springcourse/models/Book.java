@@ -20,7 +20,6 @@ public class Book {
     @Max(value = 2024, message = "Year shouldn't be greater than 2024")
     private int year;
 
-    @NotEmpty
     private Integer owner;
 
     public Book() {

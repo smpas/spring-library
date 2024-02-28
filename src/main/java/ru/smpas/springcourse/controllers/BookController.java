@@ -92,7 +92,6 @@ public class BookController {
     @PatchMapping("/{bookId}/new-owner")
     public String setOwner(@PathVariable("bookId") int bookId,
                            @ModelAttribute("person") Person person) {
-        System.out.println(person.getId());
         bookDao.setOwner(bookId, person.getId());
         return "redirect:/books/{bookId}";
     }

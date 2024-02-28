@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ru.alishev.springcourse</groupId>
-  <artifactId>spring-jdbc-template</artifactId>
+  <artifactId>spring-library-project</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 

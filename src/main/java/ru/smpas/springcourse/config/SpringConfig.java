@@ -1,4 +1,4 @@
-package ru.alishev.springcourse.config;
+package ru.smpas.springcourse.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -23,7 +23,7 @@ import java.util.Objects;
  * @author Neil Alishev
  */
 @Configuration
-@ComponentScan("ru.alishev.springcourse")
+@ComponentScan("ru.smpas.springcourse")
 @EnableWebMvc
 @PropertySource("classpath:database.properties")
 public class SpringConfig implements WebMvcConfigurer {

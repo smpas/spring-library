@@ -1,6 +1,9 @@
 package ru.smpas.springcourse.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.smpas.springcourse.models.Book;
@@ -22,8 +25,20 @@ public class BookService {
         this.personRepository = personRepository;
     }
 
-    public List<Book> index() {
-        return bookRepository.findAll();
+    public List<Book> index(Integer page, Integer booksPerPage, Boolean sortByYear) {
+        if (page != null && booksPerPage != null) {
+            if (sortByYear == null || !sortByYear) {
+                return bookRepository.findAll(PageRequest.of(page, booksPerPage)).getContent();
+            } else {
+                return bookRepository.findAll(PageRequest.of(page, booksPerPage, Sort.by("year"))).getContent();
+            }
+        }
+
+        if (sortByYear == null || !sortByYear) {
+            return bookRepository.findAll();
+        } else {
+            return bookRepository.findAll(Sort.by("year"));
+        }
     }
 
     public Book show(int id) {

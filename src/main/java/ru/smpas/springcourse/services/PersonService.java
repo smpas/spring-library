@@ -20,7 +20,6 @@ public class PersonService {
         this.personRepository = personRepository;
     }
 
-    // TODO: проверить подгружаются ли книги человека или надо вызвать геттер
     public List<Person> index() {
         return personRepository.findAll();
     }

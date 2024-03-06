@@ -1,25 +1,36 @@
 package ru.smpas.springcourse.models;
 
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+@Entity
+@Table(name = "Book")
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
     @NotEmpty(message = "Book name should not be empty")
     @Size(min = 2, max = 40, message = "Book name should be between 2 and 40 characters")
+    @Column(name = "name")
     private String name;
 
     @NotEmpty(message = "Author name should not be empty")
     @Size(min = 2, max = 40, message = "Author name should be between 2 and 40 characters")
+    @Column(name = "author")
     private String author;
 
     @Min(value = 0, message = "Year should be greater than 0")
     @Max(value = 2024, message = "Year shouldn't be greater than 2024")
+    @Column(name = "year")
     private int year;
 
+    @ManyToOne
+    @JoinColumn(name = "owner", referencedColumnName = "id")
     private Person owner;
 
     public Book() {

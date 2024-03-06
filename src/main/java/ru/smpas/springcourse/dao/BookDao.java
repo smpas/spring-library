@@ -11,6 +11,7 @@ import java.util.List;
 
 @Component
 public class BookDao {
+/*
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -63,4 +64,5 @@ public class BookDao {
     public void setOwner(int bookId, int ownerId) {
         jdbcTemplate.update("UPDATE book SET owner = ? WHERE id = ?", ownerId, bookId);
     }
+*/
 }

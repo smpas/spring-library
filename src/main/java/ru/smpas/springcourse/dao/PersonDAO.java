@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Component
 public class PersonDAO {
+/*
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -59,4 +60,5 @@ public class PersonDAO {
     public void delete(int id) {
         jdbcTemplate.update("DELETE FROM Person WHERE id=?", id);
     }
+*/
 }

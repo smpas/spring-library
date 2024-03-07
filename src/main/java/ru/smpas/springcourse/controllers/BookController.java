@@ -96,4 +96,12 @@ public class BookController {
         bookService.setBookOwner(bookId, person.getId());
         return "redirect:/books/{bookId}";
     }
+
+    @GetMapping("/search")
+    public String searchPage(Model model, @RequestParam(name = "query", required = false) String query) {
+        if (query != null) {
+            model.addAttribute("book", bookService.searchBook(query));
+        }
+        return "/books/search";
+    }
 }

@@ -82,4 +82,8 @@ public class BookService {
 
         book.setOwner(owner);
     }
+
+    public Book searchBook(String query) {
+        return bookRepository.findFirstByNameStartsWith(query);
+    }
 }

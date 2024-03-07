@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search book</title>
+</head>
+<body>
+
+<form action="#" th:action="@{/books/search}" method="get">
+    <label for="query">Enter search query:</label>
+    <input type="text" id="query" name="query"/>
+    <button type="submit" onclick="submitForm()">Search!</button>
+</form>
+
+<div th:if="${book}">
+    <p><span th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}"></span></p>
+    <!-- Проверяем, есть ли у книги владелец -->
+    <div th:if="${book.owner}">
+        <p>Book taken by <span th:text="${book.owner.getName()}"></span></p>
+    </div>
+    <div th:if="${book.owner == null}">
+        <p>Book is free<span th:text="${book.owner.getName()}"></span></p>
+    </div>
+</div>
+
+<div th:if="${book == null}">
+    <p>Book hasn't found</p>
+</div>
+
+
+<script th:inline="javascript">
+    function submitForm() {
+        var query = document.getElementById("query").value;
+        window.location.href = "/books/search?query=" + encodeURIComponent(query);
+    }
+</script>
+
+
+</body>
+</html>

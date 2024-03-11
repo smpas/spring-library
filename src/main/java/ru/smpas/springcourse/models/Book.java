@@ -5,6 +5,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
 @Table(name = "Book")
@@ -33,6 +34,13 @@ public class Book {
     @JoinColumn(name = "owner", referencedColumnName = "id")
     private Person owner;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "taken_time")
+    private Date timeTaken;
+
+    @Transient
+    private Boolean isBookOverdue;
+
     public Book() {
     }
 
@@ -41,6 +49,10 @@ public class Book {
         this.name = name;
         this.author = author;
         this.year = year;
+    }
+
+    public void updateOverdue() {
+        setBookOverdue(System.currentTimeMillis() - timeTaken.getTime() >= 10 * 24 * 60 * 60 * 1000);
     }
 
     public int getId() {
@@ -81,5 +93,21 @@ public class Book {
 
     public void setOwner(Person owner) {
         this.owner = owner;
+    }
+
+    public Date getTimeTaken() {
+        return timeTaken;
+    }
+
+    public void setTimeTaken(Date timeTaken) {
+        this.timeTaken = timeTaken;
+    }
+
+    public Boolean getBookOverdue() {
+        return isBookOverdue;
+    }
+
+    public void setBookOverdue(Boolean bookOverdue) {
+        isBookOverdue = bookOverdue;
     }
 }

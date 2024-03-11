@@ -4,6 +4,7 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.smpas.springcourse.models.Book;
 import ru.smpas.springcourse.models.Person;
 import ru.smpas.springcourse.repositories.PersonRepository;
 
@@ -31,6 +32,9 @@ public class PersonService {
         }
 
         Hibernate.initialize(person.getBooks());
+        for (Book book : person.getBooks()) {
+            book.updateOverdue();
+        }
         return person;
     }
 

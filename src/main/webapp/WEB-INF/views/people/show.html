@@ -12,8 +12,8 @@
     <hr>
     <p>Books:</p>
     <p th:each="book : ${person.getBooks()}">
-        <a th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}">book</a>
-    </p>
+        <a th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear() + ', ' + book.getBookOverdue()}"
+           th:style="${book.getBookOverdue()} ? 'color: red' : ''">book</a>    </p>
 </div>
 
 <div th:if="${#lists.isEmpty(person.getBooks())}">

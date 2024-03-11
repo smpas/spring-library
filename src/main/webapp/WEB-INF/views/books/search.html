@@ -27,14 +27,12 @@
     <p>Book hasn't found</p>
 </div>
 
-
 <script th:inline="javascript">
     function submitForm() {
         var query = document.getElementById("query").value;
         window.location.href = "/books/search?query=" + encodeURIComponent(query);
     }
 </script>
-
 
 </body>
 </html>

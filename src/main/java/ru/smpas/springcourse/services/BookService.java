@@ -11,6 +11,7 @@ import ru.smpas.springcourse.models.Person;
 import ru.smpas.springcourse.repositories.BookRepository;
 import ru.smpas.springcourse.repositories.PersonRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -81,6 +82,8 @@ public class BookService {
         }
 
         book.setOwner(owner);
+        book.setTimeTaken(new Date(System.currentTimeMillis()));
+        book.setBookOverdue(false);
     }
 
     public Book searchBook(String query) {
